@@ -16,3 +16,12 @@ const fs = require ('fs');
     err: se utiliza para almacenar cualquier error que ocurra durante la operacion.
     data: se utiliza para almacenar los datos o el resultado de la operacion
     */ 
+
+    fs.readFile('colores1.json','utf8', (err, data) => {
+        var informacion= data;                    
+        console.log("IMPRESIÓN DE LA INFORMACIÓN\n♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠\n");
+        console.log(informacion);
+        
+        var largoInformacion=data.length;
+        console.log("El largo de la informacion es: "+largoInformacion);
+    });
