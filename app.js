@@ -44,23 +44,23 @@ fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
 
     for(let i=0; i<infoJSON.length;i++){ //bucle for (A) que busca el primer caracter en la DATA.
         if(infoJSON[i]!=caracterVacio){
-            console.log("Caracter encontrado en la posicion: "+i);
+            console.log("Caracter encontrado en la posicion: "+i+". Es el caracter: "+infoJSON[i]);
             primeraLetra=infoJSON[i];
+            posicionPrimerCaracter=i;
             break; //detener el bucle for en la posición donde se cumplió la condición
         }
     }//fin bucle for (A)
- 
 
-    for (let i=0; i<infoJSON.length; i++){ //inicio bucle for A
-        if(infoJSON[i]==corcheteApertura){
-            banderaCorcheteAp=true;
-            posicionCorcheteAp=i;
-            console.log("Se detendra el programa, la posicion del corchete de apertura es: "+posicionCorcheteAp);
-            break; // Detener el bucle cuando se encuentra el corchete de apertura
-        }//fin de condicion encontrar "{""
-    }//fin bucle for A
+    if(primeraLetra==corcheteApertura){
+        banderaCorcheteAp=true;
+        posicionCorcheteAp=posicionPrimerCaracter;
+        console.log("Se detendra el programa, la posicion del corchete de apertura es: "+posicionCorcheteAp);
+    }else{
+        console.log("Error de sintaxis. No se encontró '{' al inicio del .JSON");
+    }  //fin de condicion encontrar "{""
+   
 
-
+    //Aquí entra si se encontró el corchete de apertura al inicio.
     if(banderaCorcheteAp==true){ //lo siguiente del corchete de apertura es buscar (")
        
     }
