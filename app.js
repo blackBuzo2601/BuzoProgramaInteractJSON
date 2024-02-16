@@ -54,6 +54,8 @@ fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
         }
     }//fin bucle for (A)
 
+
+    //BLOQUE PARA ACTIVAR BANDERA DE CORCHETE APERTURA
     if(primeraLetra==corcheteApertura){
         banderaCorcheteAp=true;
         posicionCorcheteAp=posicionPrimerCaracter;
@@ -63,14 +65,15 @@ fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
     }  //fin de condicion encontrar "{""
    
 //------------BUSCAR QUE DESPUES DEL "{" exista un (")-----------------------------------------------------------
-    //CONDICIONAL DEL CORCHETE 
+//♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠CONDICIONAL DEL CORCHETE♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠
     if(banderaCorcheteAp==true){ //lo siguiente del corchete de apertura es buscar (")
         for(let i=posicionCorcheteAp; i<infoJSON.length;i++){ //bucle for (B) que busca (") despues del {
             if(infoJSON[i]!=caracterVacio){
                 if(infoJSON[i]==comillasDobles){ //verificar que el siguiente caracter estrictamente sean comillas dobles
                     console.log("Comillas dobles encontradas en la posición: "+i);
                     posicionComillasDobles1=i;
-                    break; //Detener bucle for por completo
+                    formarClave=formarClave+infoJSON[i];
+                    break; //Detener bucle for por completod
                 }
             } 
         }//fin bucle for (B) 
@@ -81,16 +84,16 @@ fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
             if(ABCDARIO.includes(infoJSON[i])){
                 formarClave=formarClave+infoJSON[i];
             }else{
-                break; //detener pues encontró otro caracter
+                break; //detener pues encontró otro caracterer
             }
         }         
     }//fin bucle for (C) 
-    console.log("PRUEBA PALABRA FORMADA ES: "+formarClave);
+    console.log("CLAVE ENCONTRADA: "+formarClave);
 
 
 
 
-    }//FIN DEL CONDICIONAL DEL CORCHETE
+    }//♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠FIN DEL CONDICIONAL DEL CORCHETE♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠
 
 
 
