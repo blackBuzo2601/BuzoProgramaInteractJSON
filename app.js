@@ -29,28 +29,42 @@ const fs = require ('fs');
 //Declaración de variables
 const corcheteApertura="{";
 const corcheteCierre="}";
-var banderaCorcheteAp=false;
-var banderaCorcheteCie=false;
-var posicionCorcheteAp=5; //inicialización de variable (ignorar que es un 5)
-
+const comillasDobles='"';
+const caracterVacio=" ";
+var primeraLetra="";
+  var banderaCorcheteAp=false;
+  var banderaCorcheteCie=false;
+    var posicionCorcheteAp=5; //inicialización de variable (ignorar que es un 5)
+    var arrayDeLaData=[];
 
 fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
     console.log("\n\n\n♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠\n♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠\n♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠\n♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠");
     console.log("Bienvenido usuario: Este es un algoritmo para leer JSON.");
     var infoJSON = data; //variable que almacena toda la información del archivo .JSON
-    
 
-    for (let i=0; i<infoJSON.length; i++){
+    for(let i=0; i<infoJSON.length;i++){ //bucle for (A) que busca el primer caracter en la DATA.
+        if(infoJSON[i]!=caracterVacio){
+            console.log("Caracter encontrado en la posicion: "+i);
+            primeraLetra=infoJSON[i];
+            break; //detener el bucle for en la posición donde se cumplió la condición
+        }
+    }//fin bucle for (A)
+ 
+
+    for (let i=0; i<infoJSON.length; i++){ //inicio bucle for A
         if(infoJSON[i]==corcheteApertura){
             banderaCorcheteAp=true;
             posicionCorcheteAp=i;
             console.log("Se detendra el programa, la posicion del corchete de apertura es: "+posicionCorcheteAp);
             break; // Detener el bucle cuando se encuentra el corchete de apertura
         }//fin de condicion encontrar "{""
+    }//fin bucle for A
 
-    }//fin bucle for que busca el corchete de apertura
-    
-    //for (let j=posicionCorcheteAp;j<infoJSON.length)
+
+    if(banderaCorcheteAp==true){ //lo siguiente del corchete de apertura es buscar (")
+       
+    }
+
 
 
 
