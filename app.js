@@ -29,9 +29,9 @@ const fs = require ('fs');
 //Declaración de variables
 const corcheteApertura="{";
 const corcheteCierre="}";
-var banderaCorcheteApertura=false;
-var banderaCorcheteCierre=false;
-
+var banderaCorcheteAp=false;
+var banderaCorcheteCie=false;
+var posicionCorcheteAp=5; //inicialización de variable (ignorar que es un 5)
 
 
 fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
@@ -39,14 +39,18 @@ fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
     console.log("Bienvenido usuario: Este es un algoritmo para leer JSON.");
     var infoJSON = data; //variable que almacena toda la información del archivo .JSON
     
+
     for (let i=0; i<infoJSON.length; i++){
         if(infoJSON[i]==corcheteApertura){
-            console.log("Corchete apertura encontrado en la posicion: "+i);
-            console.log(infoJSON[i]);
-        }
+            banderaCorcheteAp=true;
+            posicionCorcheteAp=i;
+            console.log("Se detendra el programa, la posicion del corchete de apertura es: "+posicionCorcheteAp);
+            break; // Detener el bucle cuando se encuentra el corchete de apertura
+        }//fin de condicion encontrar "{""
 
-    }
+    }//fin bucle for que busca el corchete de apertura
     
+    //for (let j=posicionCorcheteAp;j<infoJSON.length)
 
 
 
