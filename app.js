@@ -35,9 +35,11 @@ const caracterVacio=" ";
 var primeraLetra="";
   var banderaCorcheteAp=false;
   var banderaCorcheteCie=false;
+  var banderaClaveCorrecta=false;
+  var banderaEspaciosVacios=false;
     var posicionCorcheteAp=5; //inicialización de variable (ignorar que es un 5)
-    var arrayDeLaData=[];
     var formarClave="";
+    var formarClaveTrimeado="";
     const ABCDARIO="abcdefghijklmnopqrstuvwxyzABCDEFGHIZJKLMNOPQRSTUVWXYZ";
 
 fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
@@ -66,7 +68,7 @@ fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
    
 //------------BUSCAR QUE DESPUES DEL "{" exista un (")-----------------------------------------------------------
 //♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠CONDICIONAL DEL CORCHETE♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠
-    if(banderaCorcheteAp==true){ //lo siguiente del corchete de apertura es buscar (")
+    if(banderaCorcheteAp==true){//lo siguiente del corchete de apertura es buscar (")
         for(let i=posicionCorcheteAp; i<infoJSON.length;i++){ //bucle for (B) que busca (") despues del {
             if(infoJSON[i]!=caracterVacio){
                 if(infoJSON[i]==comillasDobles){ //verificar que el siguiente caracter estrictamente sean comillas dobles
@@ -80,27 +82,31 @@ fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
 
 
     for(let i=posicionComillasDobles1+1;i<infoJSON.length;i++){ //bucle for (C) que busca letras del abecedario, +1 para buscar despues del "
-        if(ABCDARIO.includes(infoJSON[i])){
+        if(ABCDARIO.includes(infoJSON[i])){ //verificar que sean letras para construir la clave
             formarClave=formarClave+infoJSON[i];
         }
-        else if(infoJSON[i]==comillasDobles){
+        else if(infoJSON[i]==comillasDobles){ //si no encuentra letras, debe encontrar las comillas dobles.
             formarClave=formarClave+infoJSON[i];
+            banderaClaveCorrecta=true;
             break;
         }
-        else{
+        else if(infoJSON[i]==" "){ //si no encontró las comillas, puede haber un espacio todavía
+            formarClave=formarClave+infoJSON[i];
+        }
+        else{ //si no encontró las comillas dobles, es error de sintaxis porque las comillas son parte de la clave.
             console.log("Error de sintaxis. No se construyó correctamente la clave: "+formarClave);
             break;
         }
         
-    }//fin bucle for (C) 
-    console.log("CLAVE ENCONTRADA: "+formarClave);
-
-
+}//fin bucle for (C) 
+  
 
 
     }//♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠FIN DEL CONDICIONAL DEL CORCHETE♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠
 
-
+    if(banderaClaveCorrecta==true){ //Para que esté en true, tiene que haber entrado en los for anteriores
+        console.log("CLAVE: "+formarClave);
+    }
 
 
 
