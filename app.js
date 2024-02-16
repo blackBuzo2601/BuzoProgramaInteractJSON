@@ -30,6 +30,7 @@ const fs = require ('fs');
 const corcheteApertura="{";
 const corcheteCierre="}";
 const comillasDobles='"';
+var posicionComillasDobles1=0;
 const caracterVacio=" ";
 var primeraLetra="";
   var banderaCorcheteAp=false;
@@ -59,16 +60,27 @@ fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
         console.log("Error de sintaxis. No se encontró '{' al inicio del .JSON");
     }  //fin de condicion encontrar "{""
    
-
+//------------BUSCAR QUE DESPUES DEL "{" exista un (")-----------------------------------------------------------
     //Aquí entra si se encontró el corchete de apertura al inicio.
     if(banderaCorcheteAp==true){ //lo siguiente del corchete de apertura es buscar (")
-       
+
+        for(let i=posicionCorcheteAp+1; i<infoJSON.length;i++){ //bucle for (B) que busca (") despues del {
+            if(infoJSON[i]!=caracterVacio){
+                if(infoJSON[i]==comillasDobles){ //verificar que el siguiente caracter estrictamente sean comillas dobles
+                    console.log("Comillas dobles encontradas en la posición: "+i);
+                    posicionComillasDobles1=i;
+                    break;
+                }
+            } 
+        }//fin bucle for (B) 
+
+
     }
 
 
 
 
 
-});  //fin del método readFILE
+});//////////////////////////////////////fin del método readFILE///////////////////////////////////////////////////
 
 
