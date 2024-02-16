@@ -72,21 +72,26 @@ fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
                 if(infoJSON[i]==comillasDobles){ //verificar que el siguiente caracter estrictamente sean comillas dobles
                     console.log("Comillas dobles encontradas en la posición: "+i);
                     posicionComillasDobles1=i;
-                    formarClave=formarClave+infoJSON[i];
+                    formarClave=formarClave+infoJSON[i]; //almacenar las comillas dobles para la CLAVE
                     break; //Detener bucle for por completod
                 }
             } 
         }//fin bucle for (B) 
 
 
-    for(let i=posicionComillasDobles1;i<infoJSON.length;i++){ //bucle for (C) que busca letras del abecedario
-        if(infoJSON[i]!=comillasDobles){
-            if(ABCDARIO.includes(infoJSON[i])){
-                formarClave=formarClave+infoJSON[i];
-            }else{
-                break; //detener pues encontró otro caracterer
-            }
-        }         
+    for(let i=posicionComillasDobles1+1;i<infoJSON.length;i++){ //bucle for (C) que busca letras del abecedario, +1 para buscar despues del "
+        if(ABCDARIO.includes(infoJSON[i])){
+            formarClave=formarClave+infoJSON[i];
+        }
+        else if(infoJSON[i]==comillasDobles){
+            formarClave=formarClave+infoJSON[i];
+            break;
+        }
+        else{
+            console.log("Error de sintaxis. No se construyó correctamente la clave: "+formarClave);
+            break;
+        }
+        
     }//fin bucle for (C) 
     console.log("CLAVE ENCONTRADA: "+formarClave);
 
