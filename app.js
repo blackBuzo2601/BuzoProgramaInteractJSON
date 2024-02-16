@@ -37,6 +37,8 @@ var primeraLetra="";
   var banderaCorcheteCie=false;
     var posicionCorcheteAp=5; //inicialización de variable (ignorar que es un 5)
     var arrayDeLaData=[];
+    var formarClave="";
+    const ABCDARIO="abcdefghijklmnopqrstuvwxyzABCDEFGHIZJKLMNOPQRSTUVWXYZ";
 
 fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
     console.log("\n\n\n♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠\n♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠\n♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠\n♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠");
@@ -55,27 +57,40 @@ fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
     if(primeraLetra==corcheteApertura){
         banderaCorcheteAp=true;
         posicionCorcheteAp=posicionPrimerCaracter;
-        console.log("Se detendra el programa, la posicion del corchete de apertura es: "+posicionCorcheteAp);
+        console.log("La posicion del corchete de apertura es: "+posicionCorcheteAp);
     }else{
         console.log("Error de sintaxis. No se encontró '{' al inicio del .JSON");
     }  //fin de condicion encontrar "{""
    
 //------------BUSCAR QUE DESPUES DEL "{" exista un (")-----------------------------------------------------------
-    //Aquí entra si se encontró el corchete de apertura al inicio.
+    //CONDICIONAL DEL CORCHETE 
     if(banderaCorcheteAp==true){ //lo siguiente del corchete de apertura es buscar (")
-
-        for(let i=posicionCorcheteAp+1; i<infoJSON.length;i++){ //bucle for (B) que busca (") despues del {
+        for(let i=posicionCorcheteAp; i<infoJSON.length;i++){ //bucle for (B) que busca (") despues del {
             if(infoJSON[i]!=caracterVacio){
                 if(infoJSON[i]==comillasDobles){ //verificar que el siguiente caracter estrictamente sean comillas dobles
                     console.log("Comillas dobles encontradas en la posición: "+i);
                     posicionComillasDobles1=i;
-                    break;
+                    break; //Detener bucle for por completo
                 }
             } 
         }//fin bucle for (B) 
 
 
-    }
+    for(let i=posicionComillasDobles1;i<infoJSON.length;i++){ //bucle for (C) que busca letras del abecedario
+        if(infoJSON[i]!=comillasDobles){
+            if(ABCDARIO.includes(infoJSON[i])){
+                formarClave=formarClave+infoJSON[i];
+            }else{
+                break; //detener pues encontró otro caracter
+            }
+        }         
+    }//fin bucle for (C) 
+    console.log("PRUEBA PALABRA FORMADA ES: "+formarClave);
+
+
+
+
+    }//FIN DEL CONDICIONAL DEL CORCHETE
 
 
 
