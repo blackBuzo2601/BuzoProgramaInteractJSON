@@ -1,4 +1,5 @@
-   {  e "    arrayColoresee   e "   :     [{
+   {  
+        "arrayColores "   :     [{ 
             "nombreColor":"rojo",
             "valorHexadec":"#f00"
         },

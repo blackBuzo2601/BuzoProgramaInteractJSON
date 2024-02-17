@@ -58,7 +58,6 @@ var objeto = {
             }
         }//fin bucle for (A)
     
-    
         //BLOQUE PARA ACTIVAR BANDERA DE CORCHETE APERTURA
         if(primeraLetra==corcheteApertura){
             banderaCorcheteAp=true;
@@ -71,13 +70,14 @@ var objeto = {
     //------------BUSCAR QUE DESPUES DEL "{" exista un (")-----------------------------------------------------------
     //♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠CONDICIONAL DEL CORCHETE♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠
         if(banderaCorcheteAp==true){//lo siguiente del corchete de apertura es buscar (")
-            for(let i=posicionCorcheteAp; i<infoJSON.length;i++){ //bucle for (B) que busca (") despues del {
+            for(let i=posicionCorcheteAp+1; i<infoJSON.length;i++){ //bucle for (B) que busca (") despues del {. +1 para buscar adelante de la llave.
                 if(infoJSON[i]!=caracterVacio){
 
                     if(infoJSON[i]==comillasDobles){ //verificar que el siguiente caracter estrictamente sean comillas dobles
                         console.log("Comillas dobles encontradas en la posición: "+i);
                         posicionComillasDobles1=i;
                         formarClave=formarClave+infoJSON[i]; //almacenar las comillas dobles para la CLAVE
+                        banderaComillasDobles=true;
                         break; //Detener bucle for por completod
                     }else{
                         console.log("ERROR DE SINTAXIS. No se encontró comillas dobles después de ({). ");
@@ -87,7 +87,12 @@ var objeto = {
                 } 
             }//fin bucle for (B) 
     
-    
+    //NOTA: FALTA CONSIDERAR QUE LAS CLAVES NO PUEDEN TENER ESPACIOS ES DECIR: NO ESTA PERMITIDO: arrayColoresee   e
+    //ESTO MARCARIA UN ERROR PUESTO QUE NO PUEDE HABER ESPACIOS ENTRE LAS CLAVES. EL PROGRAMA BUSCARIA UN (:) enseguida
+    //arrayColoresee.
+    //NOTA 2: OTRO DETALLE QUE ENCONTRE ES QUE LOS SALTOS DE LINEA EN EL JSON TAMBIEN SON TOMADOS EN CUENTA COMO
+    //CARACTERES, POR LO QUE DEBO SPLITEAR LA INFORMACIÓN DE MANERA QUE NO LOS CONSIDERE CORRECTAMENTE. 
+    if(banderaComillasDobles==true){
         for(let i=posicionComillasDobles1+1;i<infoJSON.length;i++){ //bucle for (C) que busca letras del abecedario, +1 para buscar despues del "
             if(ABCDARIO.includes(infoJSON[i])){ //verificar que sean letras para construir la clave
                 formarClave=formarClave+infoJSON[i];
@@ -107,9 +112,9 @@ var objeto = {
             }
             
     }//fin bucle for (C) 
+}
+        
       
-    
-    
         }//♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠FIN DEL CONDICIONAL DEL CORCHETE♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠
     
         //Entra en este condicional si la clave fue escrita con la sintaxis correcta.
