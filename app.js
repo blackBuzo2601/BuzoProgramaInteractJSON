@@ -35,11 +35,13 @@ const caracterVacio=" ";
 var primeraLetra="";
   var banderaCorcheteAp=false;
   var banderaCorcheteCie=false;
-  var banderaClaveCorrecta=false;
-  var banderaEspaciosVacios=false;
+    var banderaClaveCorrecta=false;
+    var banderaLetrasIncluidas=false;
+    var banderaComillasDobles=false;
+
+  var espaciosTotales=0;
     var posicionCorcheteAp=5; //inicialización de variable (ignorar que es un 5)
     var formarClave="";
-    var formarClaveTrimeado="";
     const ABCDARIO="abcdefghijklmnopqrstuvwxyzABCDEFGHIZJKLMNOPQRSTUVWXYZ";
 
 fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
@@ -77,6 +79,10 @@ fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
                     formarClave=formarClave+infoJSON[i]; //almacenar las comillas dobles para la CLAVE
                     break; //Detener bucle for por completod
                 }
+                else if(ABCDARIO.includes(infoJSON[i])){
+                    console.log("ERROR DE SINTAXIS. No se encontró comillas dobles después de ({). ");
+                    break;
+                }
             } 
         }//fin bucle for (B) 
 
@@ -87,6 +93,7 @@ fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
         }
         else if(infoJSON[i]==comillasDobles){ //si no encuentra letras, debe encontrar las comillas dobles.
             formarClave=formarClave+infoJSON[i];
+            //aqui un condicional que valide que todo esta correcto.
             banderaClaveCorrecta=true;
             break;
         }
@@ -104,9 +111,16 @@ fs.readFile('colores1.json','utf8', (err, data) => { //todo el código aqui.
 
     }//♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠FIN DEL CONDICIONAL DEL CORCHETE♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠
 
+    //Entra en este condicional si la clave fue escrita con la sintaxis correcta.
     if(banderaClaveCorrecta==true){ //Para que esté en true, tiene que haber entrado en los for anteriores
         console.log("CLAVE: "+formarClave);
-    }
+
+        //LO SIGUIENE, ES ENCONTRAR UN ":" que es el que indica que se asigna un VALOR a la CLAVE.
+
+        
+
+
+    }//fin del condicional si la clave fue escrita con la sintaxis correcta.
 
 
 
